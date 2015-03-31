@@ -10,13 +10,14 @@ import java.net.URLConnection;
  
 import org.json.JSONObject;
 
+/* read & post json data to server */ 
 public class jsonPost {
 	public static void main(String[] args) {
         String string = "";
         try {
  
-            // Step1: Let's 1st read file from fileSystem
-            InputStream clientInputStream = new FileInputStream("/home/tristan/workspace/Source/IOFiles/sampleJson.js");
+            // read file from fileSystem
+            InputStream clientInputStream = new FileInputStream("/home/tristan/workspace/Source/IOFiles/searchBook.js");
             InputStreamReader clientReader = new InputStreamReader(clientInputStream);
             BufferedReader br = new BufferedReader(clientReader);
             String line;
@@ -27,9 +28,9 @@ public class jsonPost {
             JSONObject jsonObject = new JSONObject(string);
             System.out.println(jsonObject);
  
-            // Step2: Now pass JSON File Data to REST Service
+            // pass JSON File Data to REST Service
             try {
-                URL url = new URL("http://localhost:8080/RestfulWebService/REST/restService");
+                URL url = new URL("http://localhost:8080/RestfulService/REST/restService");
                 URLConnection connection = url.openConnection();
                 connection.setDoOutput(true);
                 connection.setRequestProperty("Content-Type", "application/json");
@@ -38,17 +39,15 @@ public class jsonPost {
                 OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
                 out.write(jsonObject.toString());
                 out.close();
-                System.out.println("ok~before");
 
                 InputStreamReader inReader = new InputStreamReader(connection.getInputStream());
-                System.out.println("ok~reader");
 
                 BufferedReader in = new BufferedReader(inReader);
                 String receivedLine;
                 while ((receivedLine = in.readLine()) != null) {
                     System.out.println(receivedLine);
                 }
-                System.out.println("\nREST Service Invoked Successfully..");
+                System.out.println("\nREST Service Invoked Successfully...");
                 in.close();
             } catch (Exception e) {
                 System.out.println("\nError while calling REST Service");
