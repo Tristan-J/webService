@@ -15,9 +15,7 @@ import org.json.JSONObject;
 public class jsonPost {
 
     public static String inputJson(String file) {
-
         String sendString = "";
-
         try {
             // read file from fileSystem
             InputStream clientInputStream = new FileInputStream(file);
@@ -36,21 +34,20 @@ public class jsonPost {
         return sendString;
     }
 
-    public static void checkJson(String jsonString) throws Exception {
+    public static boolean checkJson(String jsonString) throws Exception {
         if (StringUtils.isBlank(jsonString)) {
             throw new Exception("Not in json format - BLANK");
         }
         try {
             new JSONObject(jsonString);
+            return true;
         } catch (Exception e) {
             throw new Exception("Not in json format - ERROR", e);
         }
     }
 
     public static URLConnection passJsonToRest(String urlString, String sendString) {
-
         URLConnection connection = null;
-
         try {
             // send json data as stream to rest service
             URL url = new URL(urlString);
@@ -66,14 +63,11 @@ public class jsonPost {
             System.out.println("\nError while calling REST Service");
             System.out.println(e);
         }
-
         return connection;
     }
 
     public static String receiveReturnCode(URLConnection connection) {
-
         String receiveString = "";
-
         try {
             // receive ReturnCode from rest service
             InputStreamReader inReader = new InputStreamReader(connection.getInputStream());
@@ -93,9 +87,9 @@ public class jsonPost {
     }
 
     public static void showReceived(String receiveString) {
-
         System.out.println(receiveString);
     }
+
 
 	public static void main(String[] args) {
 
