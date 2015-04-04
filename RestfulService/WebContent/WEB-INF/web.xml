@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
     <display-name>RestfulService</display-name>
+
     <servlet>
         <servlet-name>api Jersey REST Service</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class> 
@@ -14,4 +15,28 @@
         <servlet-name>api Jersey REST Service</servlet-name>
         <url-pattern>/REST/*</url-pattern>
     </servlet-mapping>
+    
+    <servlet> 
+        <servlet-name>jms-listener</servlet-name> 
+        <servlet-class> 
+            com.flvcd.servlet.JMSListener 
+        </servlet-class> 
+        <load-on-startup>1</load-on-startup> 
+        </servlet> 
+        
+        <servlet>
+        <description>This is the description of my J2EE component</description>
+        <display-name>This is the display name of my J2EE component</display-name>
+        <servlet-name>MyPublish</servlet-name>
+        <servlet-class>com.flvcd.servlet.MyPublish</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MyPublish</servlet-name>
+        <url-pattern>/myPublish.do</url-pattern>
+    </servlet-mapping>
+      
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>
