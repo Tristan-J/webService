@@ -25,7 +25,12 @@
 
 ##JPA基本过程说明
 -   Form Oracle: The Java Persistence API provides a POJO persistence model for object-relational mapping. The Java Persistence API was developed by the EJB 3.0 software expert group as part of JSR 220, but its use is not limited to EJB software components. It can also be used directly by web applications and application clients, and even outside the Java EE platform, for example, in Java SE applications.
--   我的理解是：
+-   [wikipedia](http://en.wikipedia.org/wiki/Java_Persistence_API)
+-   基本观点：
+    -   由关系数据转化成为面向对象的操作，JPQL相比SQL更加体现对象的性质
+    -   支持批量数据处理
+    -   支持子查询
+-   我对一个基本过程的描述是：
     -   run on server 之后加载jdbc和jpa函数库
     -   入口是persistence.xml，进入后会根据配置通过jdbc数据源池链接到mysql
     -   查找之前编入相关annotation的实体（entity），将实体类map到数据库
