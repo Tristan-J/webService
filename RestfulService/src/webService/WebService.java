@@ -128,6 +128,8 @@ public class WebService {
 	public String sayPlainTextHello() {
         String returnCode = "this is a test~";
 
+        JSQLDataHandle.showTitle();
+
 		return returnCode;
 	}
 }

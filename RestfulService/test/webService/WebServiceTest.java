@@ -15,6 +15,7 @@ import static net.sourceforge.jwebunit.junit.JWebUnit.*;
 
 public class WebServiceTest {
 
+// tips about web page project testing with JWebUnit plugin
     // @Before
     // public void prepare() {
     //     setBaseUrl("http://localhost:8080/RestfulService/");

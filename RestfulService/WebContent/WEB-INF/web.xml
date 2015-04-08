@@ -15,7 +15,7 @@
         <servlet-name>api Jersey REST Service</servlet-name>
         <url-pattern>/REST/*</url-pattern>
     </servlet-mapping>
-    
+
     <servlet> 
         <servlet-name>jms-listener</servlet-name> 
         <servlet-class> 
