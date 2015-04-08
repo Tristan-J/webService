@@ -38,8 +38,8 @@
     -   当有对数据库的操作发生时，会首先通过类似sql的jpql在内存中的数据库中进行操作，检验命令是否正确，成功后对应操作物理介质上的数据库
     -   当物理介质上的数据库完成了修改，会返回修改内存中的数据库
 -   从tutorialspoint中卡的图：
-![驱动中的类](http://img.blog.csdn.net/20150408190408785)
-![对应简介](http://img.blog.csdn.net/20150408190414732)
+    -   ![驱动中的类](http://img.blog.csdn.net/20150408190408785)
+    -   ![对应简介](http://img.blog.csdn.net/20150408190414732)
 
 
 ##将原dynamic web service 添加JPA facet
