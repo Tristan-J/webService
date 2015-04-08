@@ -55,12 +55,12 @@ public class WebService {
             while ((line = in.readLine()) != null) {
                 receivedString += line;
             }
-        	try {
-        		receivedJson = new JSONObject(receivedString);
+            try {
+                receivedJson = new JSONObject(receivedString);
                 returnCode += "\n\n- receive json data successfully...";
-        	} catch (JSONException e){
-        		System.out.println("Error new Json - ");
-        	}
+            } catch (JSONException e){
+                System.out.println("Error new Json - ");
+            }
         } catch (Exception e) {
             System.out.println("Error Parsing: - ");
         }
@@ -97,9 +97,9 @@ public class WebService {
             // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
             // Close Statement and Connection
             if (stmt != null) {
                 try {
@@ -123,11 +123,13 @@ public class WebService {
     }
 
     /* receive the GET requests & test whether the server is on */
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	public String sayPlainTextHello() {
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String sayPlainTextHello() {
         String returnCode = "this is a test~";
 
-		return returnCode;
-	}
+        JpaHandle.showTitle();
+
+        return returnCode;
+    }
 }
