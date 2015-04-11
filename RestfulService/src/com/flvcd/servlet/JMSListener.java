@@ -6,34 +6,39 @@ import javax.servlet.http.*;
 import javax.naming.*; 
 import javax.jms.*; 
 import org.apache.activemq.ActiveMQConnectionFactory; 
- 
+
 public class JMSListener extends HttpServlet implements MessageListener { 
-    /** 初始化jms连接，创建topic监听器 */ 
+    
+    // initialize the JNDI variables and type of consumers
     public void init(ServletConfig config) throws ServletException { 
-        try { 
+        try {
             InitialContext initCtx = new InitialContext(); 
-            Context envContext = (Context) initCtx.lookup("java:comp/env"); 
-            ConnectionFactory connectionFactory = (ConnectionFactory) envContext 
-                    .lookup("jms/FailoverConnectionFactory"); 
+            Context envContext = (Context) initCtx.lookup("java:comp/env");
+
+            ConnectionFactory connectionFactory = (ConnectionFactory) envContext.lookup("jms/FailoverConnectionFactory"); 
             Connection connection = connectionFactory.createConnection(); 
             connection.setClientID("MyClient"); 
-            Session jmsSession = connection.createSession(false, 
-                    Session.AUTO_ACKNOWLEDGE); 
-            // 普通消息订阅者，无法接收持久消息 //MessageConsumer consumer = 
-            // jmsSession.createConsumer((Destination) 
-            // envContext.lookup("jms/topic/MyTopic")); 
-            // //基于Topic创建持久的消息订阅者，前提：Connection必须指定一个唯一的clientId，当前为MyClient 
-        TopicSubscriber consumer=jmsSession.createDurableSubscriber((Topic)envContext.lookup("jms/topic/MyTopic"), "MySub"); 
+            Session jmsSession = connection.createSession(false, Session.AUTO_ACKNOWLEDGE); 
+            
+            // - Queue message consumer
+            MessageConsumer consumer = jmsSession.createConsumer((Destination)envContext.lookup("jms/queue/MyQueue")); 
+            
+            // - Normal topic message subscriber and can't receive persistent messages
+            // MessageConsumer consumer = jmsSession.createConsumer((Destination)envContext.lookup("jms/topic/MyTopic")); 
+            
+            // - Persistent message consumer which is based on Topic, besides, Connection must have a unique clientId, and now its "MyClient"
+            // TopicSubscriber consumer = jmsSession.createDurableSubscriber((Topic)envContext.lookup("jms/topic/MyTopic"), "MySub"); 
+            
             consumer.setMessageListener(this); 
-            connection.start(); 
+            connection.start();
         } catch (NamingException e) { 
             e.printStackTrace(); 
         } catch (JMSException e) { 
             e.printStackTrace(); 
         } 
     } 
- 
-    /** 接收消息，做对应处理 */ 
+
+    // asynchronously receive the messages and handle it
     public void onMessage(Message message) { 
         if (checkText(message, "RefreshArticleId") != null) { 
             String articleId = checkText(message, "RefreshArticleId"); 
@@ -41,11 +46,25 @@ public class JMSListener extends HttpServlet implements MessageListener {
         } else if (checkText(message, "RefreshThreadId") != null) { 
             String threadId = checkText(message, "RefreshThreadId"); 
             System.out.println("接收刷新论坛帖子消息，开始刷新帖子ID=" + threadId); 
-        } else { 
+        } else {
             System.out.println("接收普通消息，不做任何处理！"); 
-        } 
-    } 
- 
+        }
+    }
+
+    // synchronously receive the messages and handle them
+    public void receive(Message message) {
+        if (checkText(message, "RefreshArticleId") != null) { 
+            String articleId = checkText(message, "RefreshArticleId"); 
+            System.out.println("接收刷新文章消息，开始刷新文章ID=" + articleId); 
+        } else if (checkText(message, "RefreshThreadId") != null) { 
+            String threadId = checkText(message, "RefreshThreadId"); 
+            System.out.println("接收刷新论坛帖子消息，开始刷新帖子ID=" + threadId); 
+        } else {
+            System.out.println("接收普通消息，不做任何处理！"); 
+        }
+    }
+
+    // return the string content of message
     private static String checkText(Message m, String s) { 
         try { 
             return m.getStringProperty(s); 
