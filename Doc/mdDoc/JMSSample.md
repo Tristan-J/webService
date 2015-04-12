@@ -22,15 +22,21 @@
 ##JMS 基本概念
 -   From Oracle: Messaging is a method of communication between software components or applications. A messaging system is a peer-to-peer facility: A messaging client can send messages to, and receive messages from, any other client. Each client connects to a messaging agent that provides facilities for creating, sending, receiving, and reading messages.
 -   [wikipedia](http://en.wikipedia.org/wiki/Java_Message_Service)
+-   一些主要想法：
+    -   基本作用：在两个相互独立的对象（分布式系统、程序甚至简单的代码块）之间传递消息
+    -   满足了工程模块通信时松耦合的要求
+    -   之后可能要继续挖坑的方向（from[《Java消息服务》](http://www.oreilly.com.cn/index.php?func=book&isbn=978-7-121-10050-5)）
+        -   message driven bean
+        -   Spring frame for message
+        -   事件驱动体系结构 (EDA)
+        -   面向服务体系结构 (SOA)
+        -   Restful JMS API
+        -   企业服务总线 (ESB)
 -   从[javapoint](http://www.javatpoint.com/jms-tutorial)以及其他相关材料中的总结：
-    -   JMS 相关类及其关系
-![jms programming model](http://img.blog.csdn.net/20150412120834293)
-    -   p2p 方式
-![jms queue](http://img.blog.csdn.net/20150412120856554)
-    -   publisher-subscriber 方式 
-![jms topic](http://img.blog.csdn.net/20150412120913168)
-    -   以上两种方式的api
-![jms api](http://img.blog.csdn.net/20150412120923308)
+    -   ![jms programming model](http://img.blog.csdn.net/20150412120834293)
+    -   ![jms queue](http://img.blog.csdn.net/20150412120856554)
+    -   ![jms topic](http://img.blog.csdn.net/20150412120913168)
+    -   ![jms api](http://img.blog.csdn.net/20150412120923308)
 
 
 
