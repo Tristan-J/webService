@@ -16,6 +16,8 @@
         <url-pattern>/REST/*</url-pattern>
     </servlet-mapping>
 
+    <!-- enable the following lines when you need to invoke jms -->
+    <!-- 
     <servlet> 
         <servlet-name>jms-listener</servlet-name> 
         <servlet-class>
@@ -38,5 +40,5 @@
       
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
+    </welcome-file-list> -->
 </web-app>

@@ -1,0 +1,68 @@
+# extended LDIF
+#
+# LDAPv3
+# base <ou=people,dc=sample,dc=com> with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# People, sample.com
+dn: ou=People,dc=sample,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: People
+description: User Info
+
+# 1, People, sample.com
+dn: title=1,ou=People,dc=sample,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+cn: CommonName1
+sn: FamilyName1
+title: 1
+userPassword:: UGFzc3dvcmQx
+telephoneNumber: 021-63138990
+postalCode: 000000
+
+# 2, People, sample.com
+dn: title=2,ou=People,dc=sample,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+cn: CommonName1
+sn: FamilyName1
+title: 2
+userPassword:: UGFzc3dvcmQy
+telephoneNumber: 123-2
+postalCode: 000000
+
+# 3, People, sample.com
+dn: title=3,ou=People,dc=sample,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+cn: CommonName1
+sn: FamilyName1
+title: 3
+userPassword:: UGFzc3dvcmQz
+telephoneNumber: 123-3
+postalCode: 000000
+
+# jjones, People, sample.com
+dn: uid=jjones,ou=People,dc=sample,dc=com
+objectClass: inetOrgPerson
+uid: jjones
+sn: jones
+cn: janet jones
+mail: j.jones@mycompany.com
+userPassword:: amFuZXQ=
+
+# fbloggs, People, sample.com
+dn: uid=fbloggs,ou=People,dc=sample,dc=com
+objectClass: inetOrgPerson
+uid: fbloggs
+sn: bloggs
+cn: fred bloggs
+mail: f.bloggs@mycompany.com
+userPassword:: ZnJlZA==

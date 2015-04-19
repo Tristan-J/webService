@@ -4,6 +4,15 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingEnumeration;
+import javax.naming.NamingException;
+import javax.naming.directory.Attribute;
+import javax.naming.directory.Attributes;
+import javax.naming.directory.SearchControls;
+import javax.naming.directory.SearchResult;
+import javax.naming.ldap.LdapContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
@@ -15,6 +24,7 @@ import javax.ws.rs.core.Response;
 import org.json.JSONException;  
 import org.json.JSONObject;
 
+import java.util.Hashtable;
 import java.util.List;
 
 /* receive GET & POST requests from http://localhost:8080/RestfulService/API/restService */
@@ -73,6 +83,55 @@ public class WebService {
 	public String sayPlainTextHello() {
         String returnCode = "this is a test~";
 
+        try {
+			testSearch();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+            System.out.println("testSearch error");
+		}
 		return returnCode;
+	}
+	
+    // Search for fbloggs in openldap server
+	public void testSearch() throws Exception {
+
+        // Initialize context
+        Context initialContext = null;
+        LdapContext ldapContext = null;
+        try {
+            initialContext = new InitialContext();
+            ldapContext = (LdapContext) initialContext.lookup("java:comp/env/ldap/LdapResource");
+        } catch (NamingException e) {
+            e.printStackTrace();
+            System.out.println("initialContext error");
+            return;
+        }
+
+	    // Set the filter
+	    String uid = "fbloggs";
+	    String filter = "(&(objectClass=inetOrgPerson)(uid=" + uid + "))";
+
+	    // Set the contents that will be shown
+	    String[] attrPersonArray = { "uid", "userPassword", "cn", "sn", "mail" };
+	    SearchControls searchControls = new SearchControls();
+	    searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+	    searchControls.setReturningAttributes(attrPersonArray);
+
+	    // Receive result & print out
+        // NamingEnumeration<SearchResult> answer = ldapContext.search("dc=sample,dc=cn", filter.toString(), searchControls);
+	    NamingEnumeration answer = ldapContext.search("dc=sample,dc=cn", filter.toString(), searchControls);
+        StringBuffer sb = new StringBuffer();
+	    while (answer.hasMore()) {
+	        SearchResult result = (SearchResult) answer.next();
+	        Attributes attrs = result.getAttributes();
+            if (answer.hasMore()){
+                sb.append(attrs.get("cn").toString().substring(4) + ",");
+            }
+            else{
+                sb.append(attrs.get("cn").toString().substring(4));
+            }
+	        System.out.println("\n");
+	    }
 	}
 }
