@@ -37,7 +37,21 @@ public class WebServiceTest {
 		assertEquals(true, json_restResponseUnit());
 	}
 
+    @Test
+    public void testLdapSearch() {
+        // the ldap sample ldapSearch search for the full name of a person whoes uid equals to "fbloggs"
+        // (or we can search for the password for identity recognization)
+        try {
+			assertEquals("fred bloggs", WebService.ldapSearch());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 
+
+
+	// Functional Components for testJson_restResponse() 
 	private static boolean json_restResponseUnit() {
 		try {
 			String sendString = "{'name':'Stardust'}";
@@ -60,7 +74,6 @@ public class WebServiceTest {
 		}
 		return false;
 	}
-
 
     private static URLConnection passJsonToRest(String urlString, String sendString) {
         URLConnection connection = null;
