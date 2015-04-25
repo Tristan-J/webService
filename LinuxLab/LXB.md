@@ -54,7 +54,6 @@
 	
 **E4.**
 -	No report required. 
-	-	
 	
 **E5.**
 -	1.man man: the description and usage of "man" command
@@ -62,12 +61,10 @@
 	-	-k:	show all the commands that have the key word given and display the brief intro
 	-	-f
 	-	-w
-	-	
 -	2.
 	-	show the files' information
 	-	ls -l
 	-	show all the files' information including the ones unber the folders
-	-	
 
 **E6.**
 -	1.
@@ -79,28 +76,23 @@
 	-	Section #6 : Games et. Al.
 	-	Section #7 : Miscellanea
 	-	Section #8 : System Administration tools and Deamons
-	-	
 -	2.
 	-	the location of the configuration file, manual page hierachy and db caches
 	-	description
 	-	see also
 	-	the first line of the option's description
 	-	search the manual page names and descriptions
-	-	
 
 **E7.**
 -	1.
 	-	at the top of the info tree
 	-	x q H Up Down DEL SPC HOME END TAB RET l [ ]......
-	-	
 -	2.
 	-	actual example
 	-	details about version sort
 	-	general output formatting
-	-	
 -	3.
 	-	s or i and search for a next one with { or }
-	-	
 
 **E8.**<<
 -	1.the doc in iproute redirect to the ../iproute2, and there's no kernel version message mentioned in the docs
