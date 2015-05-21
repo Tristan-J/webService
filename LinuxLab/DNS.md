@@ -11,3 +11,106 @@
 	 -	5. compare the head of data in message, if the timestamp is pretty previous, then we can say it comes from the cache
 	 -	6. The answer section contains RRs that answer the question; the authority section contains RRs that point toward an authoritative name server; the additional records section contains RRswhich relate to the query, but are not strictly answers for the question.
 	 -	7. in the header section of dns protocol, If RD(Recursion Desired) is set, it directs the name server to pursue the query recursively.Recursive query support is optional.
+	 -	8. NS RR
+-	3. 
+	-	1. host DOMAIN-NAME NAME-SERVER
+	-	2. dig @NAME-SERVER DOMAIN-NAME
+	-	3. recursion is automaticaly disabled when the +nssearch or +trace is query option is used
+
+**E2. **
+-	1. 
+	-	1. 130.236.177.26
+	-	2. 130.236.177.26 www.ida.liu.se is an alias for informatix.ida.liu.se
+	-	3. 130.236.5.66
+-	2. 更改名字服务器之后，该domain name 不是ultradns收录的服务对象
+-	3. host www.ida.liu.se dns.liu.se
+
+**E3. **
+-	1. 
+``` bash
+tristan@ubuntu:~$ host -t ns amazon.com
+amazon.com name server ns1.p31.dynect.net.
+amazon.com name server ns3.p31.dynect.net.
+amazon.com name server ns2.p31.dynect.net.
+amazon.com name server pdns1.ultradns.net.
+amazon.com name server ns4.p31.dynect.net.
+amazon.com name server pdns6.ultradns.co.uk.
+```
+-	2. 0<<
+-	3. 10
+``` bash
+tristan@ubuntu:~$ host -a sysinst.ida.liu.se
+Trying "sysinst.ida.liu.se"
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 43184
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 2, ADDITIONAL: 3
+
+;; QUESTION SECTION:
+;sysinst.ida.liu.se.		IN	ANY
+
+;; ANSWER SECTION:
+sysinst.ida.liu.se.	5	IN	MX	10 ida-gw.sysinst.ida.liu.se.
+sysinst.ida.liu.se.	5	IN	SOA	sysinst-gw.ida.liu.se. davby.ida.liu.se. 2014120200 3600 1800 604800 3600
+sysinst.ida.liu.se.	5	IN	NS	ns.ida.liu.se.
+sysinst.ida.liu.se.	5	IN	NS	sysinst-gw.ida.liu.se.
+
+;; AUTHORITY SECTION:
+sysinst.ida.liu.se.	5	IN	NS	ns.ida.liu.se.
+sysinst.ida.liu.se.	5	IN	NS	sysinst-gw.ida.liu.se.
+
+;; ADDITIONAL SECTION:
+ida-gw.sysinst.ida.liu.se. 5	IN	A	130.236.189.1
+ns.ida.liu.se.		5	IN	A	130.236.177.25
+ns.ida.liu.se.		5	IN	AAAA	2001:6b0:17:f020::53
+
+Received 231 bytes from 127.0.1.1#53 in 719 ms
+
+```
+-	4. 
+``` bash
+tristan@ubuntu:~$ host -a  ida.liu.se
+Trying "ida.liu.se"
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 19182
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 4, ADDITIONAL: 3
+
+;; QUESTION SECTION:
+;ida.liu.se.			IN	ANY
+
+;; ANSWER SECTION:
+ida.liu.se.		5	IN	NS	ns1.liu.se.
+ida.liu.se.		5	IN	NS	ns2.liu.se.
+ida.liu.se.		5	IN	NS	nsauth.isy.liu.se.
+ida.liu.se.		5	IN	NS	ns.ida.liu.se.
+
+;; AUTHORITY SECTION:
+ida.liu.se.		5	IN	NS	ns1.liu.se.
+ida.liu.se.		5	IN	NS	ns2.liu.se.
+ida.liu.se.		5	IN	NS	nsauth.isy.liu.se.
+ida.liu.se.		5	IN	NS	ns.ida.liu.se.
+
+;; ADDITIONAL SECTION:
+ns.ida.liu.se.		5	IN	A	130.236.177.25
+ns.ida.liu.se.		5	IN	AAAA	2001:6b0:17:f020::53
+nsauth.isy.liu.se.	5	IN	A	130.236.48.9
+
+Received 222 bytes from 127.0.1.1#53 in 16 ms
+
+```
+
+**E4. **
+-	1. AUTHORITY: 0, ADDITIONAL: 14
+-	2. 
+	-	1. 130.236.189.1
+	-	2. 
+``` bash
+sysinst.ida.liu.se.	5	IN	NS	sysinst-gw.ida.liu.se.
+sysinst.ida.liu.se.sys.gtei.net	5	IN	NS	ns.ida.liu.se.
+```
+	-	3. dig -x 4.5.6.7 +short doesn't show anything, however, with dig -x, i think it might be sys.gtei.net
+	-	4. 
+``` bash
+ns.ida.liu.se.		5	IN	A	130.236.177.25
+ns1.liu.se.		5	IN	A	130.236.3.221
+ns2.liu.se.		5	IN	A	130.236.146.68
+nsauth.isy.liu.se.	5	IN	A	130.236.48.9	
+```
+
