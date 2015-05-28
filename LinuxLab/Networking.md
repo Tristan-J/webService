@@ -39,6 +39,7 @@
   - 1. from wikipedia: In Linux, the sysctl interface mechanism is also exported as part of procfs(process file system) under the /proc/sys directory (not to be confused with the /sys directory). This difference means checking the value of some parameter requires opening a file in a virtual file system, reading its contents, parsing them and closing the file. The sysctl system call does exist on Linux, but does not have a wrapping function in glibc and is not recommended for use.
   - 2. /etc/sysctl.conf
   - 3. 
+  ``` bash
     # Uncomment the next line to enable packet forwarding for IPv4
     #net.ipv4.ip_forward=1
 
@@ -46,6 +47,7 @@
     #  Enabling this option disables Stateless Address Autoconfiguration
     #  based on Router Advertisements for this host
     #net.ipv6.conf.all.forwarding=1
+  ```
 - 5. 
   - inet addr:192.168.194.128  Bcast:192.168.194.255  Mask:255.255.255.0
   - hostname: ubuntu
