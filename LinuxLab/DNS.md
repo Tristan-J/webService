@@ -105,12 +105,35 @@ Received 222 bytes from 127.0.1.1#53 in 16 ms
 sysinst.ida.liu.se.	5	IN	NS	sysinst-gw.ida.liu.se.
 sysinst.ida.liu.se.sys.gtei.net	5	IN	NS	ns.ida.liu.se.
 ```
-	-	3. dig -x 4.5.6.7 +short doesn't show anything, however, with dig -x, i think it might be sys.gtei.net
-	-	4. 
-``` bash
-ns.ida.liu.se.		5	IN	A	130.236.177.25
-ns1.liu.se.		5	IN	A	130.236.3.221
-ns2.liu.se.		5	IN	A	130.236.146.68
-nsauth.isy.liu.se.	5	IN	A	130.236.48.9	
-```
+	-	3. 6.5.4.3.in-addr.arpa
+-	3. 
+	-	1. 
+	``` bash
+	dig www.ida.liu.se +trace | more
+	.					202.112.14.151
+	se.					g.root-servers.net
+	liu.se.				c.ns.se
+	ida.liu.se.			ns3.liu.se
+	www.ida.liu.se.		ns1.liu.se
+	```
+	-	2.
+	``` bash
+	dig update.microsoft.com +trace | more
+	.						202.112.14.151
+	com.					f.root-servers.net
+	microsoft.com.			f.gtld-servers.net
+	update.microsoft.com.	ns4.msft.net
+	```
 
+**E5.**
+![dig www.example.com](http://img.blog.csdn.net/20150529050456133)
+
+**E6.**
+![zone of example.com.db](http://img.blog.csdn.net/20150529050446645)
+
+![dig mta.example.com](http://img.blog.csdn.net/20150529050415529)
+
+**E7.**
+![zone of reverse](http://img.blog.csdn.net/20150529050510544)
+
+![dig ns1.example.com](http://img.blog.csdn.net/20150529050616735)
